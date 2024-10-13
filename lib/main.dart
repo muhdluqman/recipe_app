@@ -8,9 +8,9 @@ import 'model/recipe.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final directory = await getApplicationDocumentsDirectory();
-  Hive.init(directory.path); // Initialize Hive with app document directory
-  Hive.registerAdapter(RecipeAdapter()); // Register Hive adapter for Recipe
-  await Hive.openBox<Recipe>('recipes'); // Open Hive box for storing recipes
+  Hive.init(directory.path);
+  Hive.registerAdapter(RecipeAdapter());
+  await Hive.openBox<Recipe>('recipes');
   runApp(MyApp());
 }
 

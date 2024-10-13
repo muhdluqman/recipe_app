@@ -25,28 +25,25 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // Initialize the controllers with the current recipe data
     nameController = TextEditingController(text: widget.recipe.name);
     ingredientsController = TextEditingController(text: widget.recipe.ingredients.join(', '));
     stepsController = TextEditingController(text: widget.recipe.steps.join(', '));
   }
 
-  // Function to update the recipe
   void updateRecipe() {
     final updatedRecipe = Recipe(
       id: widget.recipe.id,
       name: nameController.text,
       recipeType: widget.recipe.recipeType,
-      imagePath: imageFile?.path ?? widget.recipe.imagePath, // Keep original image if not updated
+      imagePath: imageFile?.path ?? widget.recipe.imagePath,
       ingredients: ingredientsController.text.split(',').map((e) => e.trim()).toList(),
       steps: stepsController.text.split(',').map((e) => e.trim()).toList(),
     );
 
     controller.updateRecipe(widget.index, updatedRecipe);
-    Get.back(); // Go back after saving
+    Get.back();
   }
 
-  // Reusable TextFormField with custom UI
   Widget buildNewTextFormField({
     required TextEditingController controller,
     required String hint,
@@ -65,48 +62,46 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
         decoration: InputDecoration(
           labelText: hint,
           labelStyle: TextStyle(
-            fontFamily: 'Poppins',
-            color: Color(0xFF606A85), // Label color
+            color: Color(0xFF606A85),
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
           hintStyle: TextStyle(
-            fontFamily: 'Plus Jakarta Sans',
-            color: Color(0xFF606A85), // Hint color
+            color: Color(0xFF606A85),
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0x00000000), // Transparent border
+              color: Color(0x00000000),
               width: 1.0,
             ),
-            borderRadius: BorderRadius.circular(36), // Rounded border
+            borderRadius: BorderRadius.circular(36),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF6F61EF), // Focused border color
+              color: Color(0xFF6F61EF),
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(36),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0xFFFF5963), // Error border color
+              color: Color(0xFFFF5963),
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(36),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0xFFFF5963), // Focused error border color
+              color: Color(0xFFFF5963),
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(36),
           ),
           filled: true,
-          fillColor: Colors.white, // Fill color for the input field
-          prefixIcon: prefixIcon, // Existing prefixIcon
+          fillColor: Colors.white,
+          prefixIcon: prefixIcon,
         ),
         style: TextStyle(
           fontFamily: 'Poppins',
@@ -114,7 +109,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
-        cursorColor: Color(0xFF6F61EF), // Cursor color
+        cursorColor: Color(0xFF6F61EF),
       ),
     );
   }
@@ -128,13 +123,13 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              controller.deleteRecipe(widget.index); // Delete recipe
+              controller.deleteRecipe(widget.index);
               Get.back();
             },
           )
         ],
       ),
-      resizeToAvoidBottomInset: true, // Ensure the body resizes when the keyboard is up
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -142,7 +137,6 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Image picker or placeholder if image not provided
                 GestureDetector(
                   onTap: () async {
                     final picker = ImagePicker();
@@ -164,23 +158,20 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 ),
                 SizedBox(height: 20),
 
-                // Editable name field using custom TextFormField
                 buildNewTextFormField(
                   controller: nameController,
                   hint: 'Recipe Name',
                 ),
 
-                // Editable ingredients field using custom TextFormField
                 buildNewTextFormField(
                   controller: ingredientsController,
-                  hint: 'Ingredients (comma-separated)',
+                  hint: 'Ingredients',
                   maxLines: 3,
                 ),
 
-                // Editable steps field using custom TextFormField
                 buildNewTextFormField(
                   controller: stepsController,
-                  hint: 'Steps (comma-separated)',
+                  hint: 'Steps',
                   maxLines: 3,
                 ),
 
@@ -197,7 +188,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                           borderRadius: BorderRadius.circular(30), // Rounded corners
                         ),
                         elevation: 5, // Shadow elevation
-                        shadowColor: Colors.black.withOpacity(0.3), // Shadow color
+                        shadowColor: Colors.black.withOpacity(0.3),
                       ),
                       onPressed: updateRecipe,
                       child: Text(

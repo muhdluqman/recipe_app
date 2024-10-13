@@ -11,7 +11,6 @@ class RecipeController extends GetxController {
     loadRecipes();
   }
 
-  // Load recipes from Hive
   void loadRecipes() async {
     var box = await Hive.openBox<Recipe>('recipes');
     recipes.value = box.values.toList();

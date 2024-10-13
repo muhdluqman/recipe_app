@@ -12,10 +12,9 @@ class RecipeListScreen extends StatefulWidget {
 
 class _RecipeListScreenState extends State<RecipeListScreen> {
   final RecipeController controller = Get.put(RecipeController());
-  String? selectedType = 'All'; // Default selected filter option
-  List<String> recipeTypes = ['All', 'Dessert', 'Main Course', 'Appetizer']; // Example recipe types
+  String? selectedType = 'All';
+  List<String> recipeTypes = ['All', 'Dessert', 'Main Course', 'Appetizer'];
 
-  // Function to filter recipes based on selected type
   List filterRecipes() {
     if (selectedType == 'All') {
       return controller.recipes;
@@ -25,7 +24,6 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
         .toList();
   }
 
-  // Function to show the popup list for selecting recipe type
   void showRecipeTypeSelector() {
     showModalBottomSheet(
       context: context,
@@ -74,7 +72,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
 
           Expanded(
             child: Obx(() {
-              final filteredRecipes = filterRecipes(); // Get the filtered recipes
+              final filteredRecipes = filterRecipes();
 
               if (filteredRecipes.isEmpty) {
                 return Center(child: Text('No recipes found.'));
@@ -132,14 +130,7 @@ class _RecipeListScreenState extends State<RecipeListScreen> {
                         ),
                       ),
                     );
-                  ListTile(
-                    title: Text(recipe.name),
-                    subtitle: Text(recipe.recipeType),
-                    onTap: () {
-                      // Navigate to Recipe Detail Screen
-                      Get.to(RecipeDetailScreen(recipe: recipe, index: index));
-                    },
-                  );
+
                 },
               );
             }),

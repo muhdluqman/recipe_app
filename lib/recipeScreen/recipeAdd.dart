@@ -81,7 +81,6 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
     return true;
   }
 
-  // Reusable TextFormField builder
   Widget buildNewTextFormField({
     required TextEditingController controller,
     required String hint,
@@ -100,56 +99,54 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
         decoration: InputDecoration(
           labelText: hint,
           labelStyle: TextStyle(
-            fontFamily: 'Poppins',
-            color: Color(0xFF606A85), // Label color
+            color: Color(0xFF606A85),
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
           hintStyle: TextStyle(
-            fontFamily: 'Plus Jakarta Sans',
-            color: Color(0xFF606A85), // Hint color
+            color: Color(0xFF606A85),
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0x00000000), // Transparent border
+              color: Color(0x00000000),
               width: 1.0,
             ),
-            borderRadius: BorderRadius.circular(36), // Rounded border
+            borderRadius: BorderRadius.circular(36),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: Color(0xFF6F61EF), // Focused border color
+              color: Color(0xFF6F61EF),
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(36),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0xFFFF5963), // Error border color
+              color: Color(0xFFFF5963),
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(36),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: Color(0xFFFF5963), // Focused error border color
+              color: Color(0xFFFF5963),
               width: 1.0,
             ),
             borderRadius: BorderRadius.circular(36),
           ),
           filled: true,
-          fillColor: Colors.white, // Fill color for the input field
-          prefixIcon: prefixIcon, // Existing prefixIcon
+          fillColor: Colors.white,
+          prefixIcon: prefixIcon,
         ),
         style: TextStyle(
           fontFamily: 'Poppins',
-          color: const Color(0xFF15161E), // Text color
+          color: const Color(0xFF15161E),
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
-        cursorColor: Color(0xFF6F61EF), // Cursor color
+        cursorColor: Color(0xFF6F61EF),
       ),
     );
   }
@@ -160,7 +157,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
       appBar: AppBar(
         title: Text('Add Recipe'),
       ),
-      // Adding SingleChildScrollView to enable scrolling
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -172,7 +169,6 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 hint: 'Recipe Name',
               ),
 
-              // Dropdown for selecting Recipe Type with hint
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 15, 16, 0),
                 child: DropdownButtonFormField<String>(
@@ -181,7 +177,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                     'Select Recipe Type',
                     style: TextStyle(
                       fontFamily: 'Poppins',
-                      color: Color(0xFF606A85), // Hint color
+                      color: Color(0xFF606A85),
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
@@ -195,28 +191,28 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Color(0x00000000), // Transparent border
+                        color: Color(0x00000000),
                         width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(36), // Match border radius
+                      borderRadius: BorderRadius.circular(36),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color(0xFF6F61EF), // Focused border color
+                        color: Color(0xFF6F61EF),
                         width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(36), // Match border radius
+                      borderRadius: BorderRadius.circular(36),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Color(0xFFFF5963), // Error border color
+                        color: Color(0xFFFF5963),
                         width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(36), // Match border radius
+                      borderRadius: BorderRadius.circular(36),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Color(0xFFFF5963), // Focused error border color
+                        color: Color(0xFFFF5963),
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(36), // Match border radius
@@ -227,7 +223,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                   ),
                   isExpanded: true,
                   icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
-                  iconSize: 24, // Set a smaller arrow size if necessary
+                  iconSize: 24,
                   items: recipeTypes.map((RecipeType type) {
                     return DropdownMenuItem<String>(
                       value: type.name,
@@ -299,7 +295,7 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
-                            imageFile!.path.split('/').last, // Display the file name
+                            imageFile!.path.split('/').last,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w400,
@@ -318,13 +314,12 @@ class _AddRecipeScreenState extends State<AddRecipeScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Validate the form before adding the recipe
                       if (validateForm()) {
                         final newRecipe = Recipe(
                           id: DateTime.now().toString(),
                           name: nameController.text,
                           recipeType: selectedRecipeType!,
-                          imagePath: imageFile?.path ?? '', // Optional: if image is not selected, pass empty string
+                          imagePath: imageFile?.path ?? '',
                           ingredients: ingredientsController.text.split(',').map((e) => e.trim()).toList(),
                           steps: stepsController.text.split(',').map((e) => e.trim()).toList(),
                         );
